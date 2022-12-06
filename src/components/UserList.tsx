@@ -11,22 +11,26 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import { get } from 'http';
 
 
 
-const UserList = () => {
+const UserList = (user:any) => {
 
-    //get a list of users from the server
+    console.log(user);
+
+    const [userAdded, setUserAdded] = useState<User[]>([]);
+
+    
     const [users, setUsers] = useState<any[]>([]);
 
     useEffect(() => {
-        UserService.getUsers().then((response) => {
-            setUsers(response);
+        UserService.getUsers().then((data) => {
+            setUsers(data);
+            setUserAdded(user)
         })
-    }
-        , []);
+    }, [user, userAdded]);
 
-        console.log(users);
 
    if(users.length === 0) {
        return <div>User list is empty...</div>
@@ -59,14 +63,8 @@ const UserList = () => {
         )
 
     }
-  
-                            
+                          
 }
-
-
-    
-    
-
 
 
 export default UserList;

@@ -6,12 +6,11 @@ import { Container } from '@mui/system';
 import SendIcon from '@mui/icons-material/Send';
 import { Card, CardContent } from '@mui/material';
 import UserList from './UserList';
+import { UserService } from '../services/UserService';
 
 
 
 const Register = () => {
-
-    
 
 
     const [user, setUser] = useState<User>({
@@ -63,30 +62,26 @@ const Register = () => {
             
         }
 
-                
 
-        fetch('http://localhost:8080/users/add', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-
-            body: JSON.stringify(data)
-        }).then(res => res.json())
-            .then(data => console.log(data))
-            .catch(err => console.log(err))
+            UserService.postUser(data)
+            .then((data) => {
+                console.log(data);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    
 
             setUser(data);
             console.log(user);
             
-            
-            
+      
             setEmail('');
             setFirstName('');
             setLastName('');
             setPhone('');
 
-            
+   
 
     };
 
@@ -94,7 +89,7 @@ const Register = () => {
     
 
     return (
-       <Container maxWidth="md" sx={{ display: 'inline-flex', justifyContent:'center', alignContent:'center', marginLeft:"12%" }} >
+       <Container maxWidth="md" sx={{ display: 'inline-flex', justifyContent:'center', alignContent:'center', marginLeft:"12%", marginTop:"2%" }} >
        
                   
         <Card style={{maxWidth: '300px', margin: 'auto', marginTop: '50px', padding: '10px'}}>
@@ -149,7 +144,9 @@ const Register = () => {
                 <small><h1>Users</h1></small>
             </Grid>
             <Grid item xs={12}>
-            <UserList/>
+            <UserList onSaveUser={user}
+            
+            />
             </Grid>
         </Grid>
         </CardContent>
