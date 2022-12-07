@@ -3,7 +3,6 @@ export type User = {
      lastName: string,
      phoneNumber: string,
      email: string,
-    
 }
 
 

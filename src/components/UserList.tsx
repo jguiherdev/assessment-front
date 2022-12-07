@@ -1,9 +1,5 @@
-import { Container } from '@mui/system';
 import { User } from '../models/User';
-import { Button, FormControl, Grid, Input, InputLabel } from '@mui/material';
-import { Card, CardContent } from '@mui/material';
 import { useState, useEffect } from 'react';
-import { Console } from 'console';
 import { UserService } from '../services/UserService';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -11,13 +7,11 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { get } from 'http';
-
 
 
 const UserList = (user:any) => {
 
-    console.log(user);
+
 
     const [userAdded, setUserAdded] = useState<User[]>([]);
 

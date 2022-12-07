@@ -12,7 +12,6 @@ import { UserService } from '../services/UserService';
 
 const Register = () => {
 
-
     const [user, setUser] = useState<User>({
         firstName: '',
         lastName: '',
@@ -21,15 +20,11 @@ const Register = () => {
     });
 
 
-   
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [phoneNumber, setPhone] = useState('');
     
-
-    
-
 
     const firstNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setFirstName(event.target.value);
@@ -49,10 +44,8 @@ const Register = () => {
     
 
 
-
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(firstName, lastName, email, phoneNumber);
 
         const data = {
             firstName,
@@ -62,30 +55,36 @@ const Register = () => {
             
         }
 
-
             UserService.postUser(data)
             .then((data) => {
                 console.log(data);
+                setUser(data);
             })
             .catch((err) => {
                 console.log(err);
             })
     
 
-            setUser(data);
-            console.log(user);
             
-      
-            setEmail('');
+
+            setUser({
+                firstName: '',
+                lastName: '',
+                phoneNumber: '',
+                email: '',
+            })
+
             setFirstName('');
             setLastName('');
+            setEmail('');
             setPhone('');
+            
+            
 
    
 
     };
 
-    //set data into user object
     
 
     return (
@@ -151,10 +150,6 @@ const Register = () => {
         </Grid>
         </CardContent>
         </Card>
-
-
-        
-
         
        </Container>
     );
